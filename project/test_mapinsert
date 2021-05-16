@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <fstream>
+#include <regex>
+
+using namespace std;
+
+class Graph{
+    public:
+        char map_id;
+        int propagation_speed;
+        int transmission_speed;
+    private:
+        map<int,int> vertexMap;
+        double** AdjMatrix;
+        int numVertices;
+    public:
+
+        Graph(char map_id, int propagation_speed, int transmission_speed, int numVertices,const &vertexMap){
+            this->map_id = map_id;
+            this->propagation_speed = propagation_speed;
+            this->transmission_speed = transmission_speed;
+            this->numVertices = 10;
+            this->vertexMap = vertexMap;
+            this->numVertices = numVertices;
+            AdjMatrix = new double*[numVertices];
+            for(i=0;i<numVertices;i++){
+                AdjMatrix[i] = new double*[numVertices];
+                for (j=0;j<numVertices;j++){
+                    AdjMatrix[i][j] = -1;
+                }
+            }
+        }
+        void add_edge(int node_1; int node_2, int weight){
+            AdjMatrix[node_1][node_2] = weight;
+            AdjMatrix[node_2][node_1] = weight;
+        }
+        void toString(){
+            for (int i =0; i<numVertices; i++){
+                cout << i << ":";
+                for(j = 0; j< numVertices;j++){
+                    cout << AdjMatrix[i][j] << " ";
+                }
+                cout << "\n";
+            }
+            cout << "\n";
+        }
+        bool isEdge (int 1,int j){
+            return(AdjMatrix[i][j]==-1);
+        }
+        void set_vertexmap(map<int,int> const&vertexMap){
+            this->vertexMap = vertexMap;
+        }
+        void set_numvertices(int numVertices){
+            this->numVertices = numVertices;
+        }
+
+}
+int main(){
+    ifstream readFile;
+    readFile.open("map.txt");
+    string line;
+    vector<Graph> graphVector;
+    int propagation_speed;
+    int transmission_speed;
+    char map_id;
+    int temp_value;
+    readFile >> line;
+    while( !readFile.eof()){
+        if(line.length()==1&&!){
+            map_id = line[0];
+            readFile >> line;
+            propagation_speed = stod(line);
+            readFile >> line;
+            transmission_speed = stod(line);
+            Graph *graphPointer = new Graph(map_id,propagation_speed,transmission_speed,numVertices,&vertexMap)
+            int numVertex = 0;
+            map<int,int> vertexMap;
+            pair<map<int,int>::iterator,bool> ret;
+            while (readFile >> line){
+                if(!isdigit(line[0])){
+                    graphVector.push_back(graphPointer);
+                    graphPointer->toString();
+                    delete graphPointer;
+                    break; 
+                }
+                int temp_1 = stoi(line);
+                printf("this from-edge is %d\n" temp_1);
+                ret = vertexMap.insert(pair<int,int>(temp_1,numVertices+);
+                if(ret.second){
+                    numVertex ++;
+                }
+                readFile >> line;
+                temp_value = stod(line);
+                graphPointer->add_edge(vertexMap[temp_1],vertexMap[temp_2]);
+                printf("This weight between two nodes is %d\n", temp_value);
+                if (readFile.eof()){
+                    graphVector.push_back(*graphPointer);
+                    graphPointer->toString();
+                    delete graphPointer;
+                    break;
+                }
+            }
+
+        }
+    }
+    printf("The number of map is %d\n", graphVector.size());
+    graphVector[0].toString();
+    graphVector[1].toString();
+    return 0;
+}
